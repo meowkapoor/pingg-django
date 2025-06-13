@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Pingg - Tweets
+{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center mt-4 ">
+    Welcome to Pingg -
+    <small class="text-body-secondary">Tiny posts. Big impact.</small>
+</h1>
+<a class="btn btn-primary mb-4" href="{% url 'tweet_create' %}">new</a>
+<div class="container row gap-3 mb-5">
+    {% for tweet in tweets %}
+    <div class="card shadow" style="width: 18rem;">
+        <img src="{{tweet.photo.url}}" class="card-img-top" alt="error">
+        <div class="card-body">
+            <h5 class="card-title">@{{tweet.user.username}}</h5>
+            <p class="card-text text-body-secondary">{{tweet.text}}</p>
+        </div>
+        {% if tweet.user == user %}
+        <div class="mt-auto d-flex justify-content-end gap-2 mb-3">
+            <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">edit</a>
+            <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger">delete</a>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card, index) => {
+      setTimeout(() => {
+        card.classList.add('show');
+      }, index * 200);
+    });
+  });
+</script>
+
+
+{% endblock %}

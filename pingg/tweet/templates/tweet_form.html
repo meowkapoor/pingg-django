@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Pingg - Tweets
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-4 ">
+    Welcome to Pingg -
+    <small class="text-body-secondary">Tiny posts. Big impact.</small>
+</h1>
+<h2 class="text-start mt-4">
+    {% if form.instance.pk %}
+    edit tweet
+    {% else %}
+    new tweet
+    {% endif %}
+</h2>
+    <form method="post" enctype="multipart/form-data" class="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button onclick="this.disabled=true; this.form.submit();" class="btn btn-warning" type="submit">done</button>
+    </form>
+    <a href="{% url 'tweet_list' %}">back to home</a>
+
+{% endblock %}
