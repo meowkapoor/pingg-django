@@ -1,1 +1,1 @@
-web: gunicorn pingg.wsgi:application
+web: gunicorn pingg.wsgi
